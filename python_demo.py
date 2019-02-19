@@ -1,5 +1,5 @@
 # python.exe
-# python -c pip install pyserial
+# python -m pip install pyserial
 # IDLE
 --------------------------------
 
