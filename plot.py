@@ -1,7 +1,7 @@
 import serial
 import matplotlib.pyplot as plt
 
-s = serial.Serial("/dev/cu.HC-05-DevB")
+s = serial.Serial("/dev/rfcomm0")
 data = []
 
 import matplotlib.animation as animation
