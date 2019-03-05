@@ -56,6 +56,7 @@ step_len = 18.0
 
 speed = (stride_len / 12.0) * CADA
 
+print()
 print( "MFP average over range: %.02d percent" % MFPA )
 print( "Cadence average over range: %.02d step/min" % CADA )
 print( "Speed is: %.02d ft/min" % speed )
