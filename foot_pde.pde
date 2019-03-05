@@ -10,6 +10,9 @@ String input;
 String[] data, p, a;
 FloatList pads, accel;
 
+// pads -> mf, mm, hl, lf
+// accel -> 
+
 final int xval=320, yval=330;
 
 void setup() { 
@@ -88,17 +91,17 @@ void draw() {
   translate(20, 25);
   
   fill(204, 102, 0);
-  ellipse( 0,0, pads.get(1), pads.get(1) );
+  ellipse( 0,0, pads.get(3), pads.get(3) );
   
   translate(-30, 20);
   
   fill(204, 102, 0);
-  ellipse( 0,0, pads.get(2), pads.get(2) );
+  ellipse( 0,0, pads.get(1), pads.get(1) );
   
   translate(20, 110);
   
   fill(204, 102, 0);
-  ellipse( 0,0, pads.get(3), pads.get(3) );
+  ellipse( 0,0, pads.get(2), pads.get(2) );
   
   popMatrix();
 
@@ -112,27 +115,30 @@ void serialEvent (Serial my_port) {
         data = split(input, ';');
         
         p = split(data[0], ',');
-        a = split(data[1], ',');
+        a = split(data[2], ',');
         
         // loop through 4 pressure points <data[0]>
         for(int i=0; i<p.length; i++){
           if (!Float.isNaN(float(p[i])))
-            pads.set( i,map(float(p[i]), 0, 1023, 0, 30) );
+            pads.set( i,map(float(p[i]), 0, 1023, 0, 35) );
           else
             pads.set( i,30 );
         }
         
         for(int i=0; i<a.length; i++){
           if (!Float.isNaN(float(a[i])))
-            accel.set( i,float(a[i]) );
+            ;// accel.set( i,float(a[i]) );
           else
-            accel.set( i,1024 );
+            ;// accel.set( i,1024 );
         }
         
         //if (!Float.isNaN(float(data[0])))
         //  pads.append(map(float(data[0]), 0, 1023, 0, height));
         //print("INPUT: ");
-        //println( input );
+        
+        // ACCEL DATA
+        // StringList accel_data = new StringList(a);
+        // println( accel_data );
         
         //TODO post processing
         // Step length -- while pressure in pads
@@ -149,6 +155,7 @@ void serialEvent (Serial my_port) {
         // Walking on the heel
         
         // Stance Phase := foot flat with ground
+        // Calculate for each stride
         // MFP ( ( MM + MF ) * 100 ) / ( MM + MF + LF + H + 0.001 )
         
         // Active time -- from accel
